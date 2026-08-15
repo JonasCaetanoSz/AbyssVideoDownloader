@@ -1,0 +1,1 @@
+from .slug_extractor import SlugExtractor
