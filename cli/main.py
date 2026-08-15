@@ -33,16 +33,18 @@ def main():
     )
 
 
+
     args = parser.parse_args()
 
 
     if args.command in ["get-video-slug", "gs"]:
 
         try:
-            slug = SlugExtractor( video_url=args.url )
+            slug_video = SlugExtractor( video_url=args.url )
 
-            if slug:
-                print( slug.value )
+            if slug_video:
+                print( slug_video.value )
+
         except InvalidSlugException as e:
             print("error: " + str(e) )
         
