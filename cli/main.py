@@ -1,5 +1,6 @@
 from core.thumbnail_extractor import thumbnail_extractor
 from core.slug_extractor import slug_extractor
+from core.metadata_extractor import metadata_extractor
 
 from exceptions import InvalidSlugException
 
@@ -58,6 +59,23 @@ def main():
         help="Maximum sprites"
     )
 
+
+    # command: get-video-metadata
+
+    metadata = sub.add_parser(
+        "get-video-metadata",
+        aliases=["gm"],
+        help="Gets the video metadata"
+    )
+
+    metadata.add_argument(
+        "-u",
+        "--url",
+        required=True,
+        help="Video URL"
+    )
+
+
     args = parser.parse_args()
 
 
@@ -78,13 +96,30 @@ def main():
     elif args.command in ["get-video-thumbnail", "gt"]:
 
         try:
-            thumbnail = thumbnail_extractor(video_url=args.url, max_sprites=args.max_sprites)
-            print("thumbnail: " + thumbnail.thumbnail + "\n" )
+            thumbnail = thumbnail_extractor(
+                video_url=args.url,
+                max_sprites=args.max_sprites
+            )
 
-            for n, sprite_url in enumerate( thumbnail.sprites, start=1):
+            print("thumbnail: " + thumbnail.thumbnail + "\n")
+
+            for n, sprite_url in enumerate(thumbnail.sprites, start=1):
                 print(f"sprite [{n}]: {sprite_url}\n")
 
-            print("\033[33mwarning: Don't forget to add the request headers with User-Agent and Referer pointing to https://abysscdn.com/\033[0m")
+            print(
+                "\033[33mwarning: Don't forget to add the request headers "
+                "with User-Agent and Referer pointing to https://abysscdn.com/\033[0m"
+            )
+
+        except Exception as e:
+            print("error: " + str(e))
+
+
+    elif args.command in ["get-video-metadata", "gm"]:
+
+        try:
+            metadata = metadata_extractor( video_url=args.url)
+            print(metadata)
 
         except Exception as e:
             print("error: " + str(e))

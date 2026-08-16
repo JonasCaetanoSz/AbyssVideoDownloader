@@ -5,12 +5,14 @@ from .crypto import (
 from .models import (
     ExpandedKey,
     EncryptedMedia,
-    VideoThumbnails
+    VideoThumbnails,
+    VideoMetadata
 )
 from .exceptions import (
     InvalidSlugException,
     InvalidUrlException,
-    ThumbnailNotFoundException
+    ThumbnailNotFoundException,
+    MetadataNotFoundException
 )
 
 from .ultils import (
@@ -25,6 +27,10 @@ from .core import (
 from .core import (
     thumbnail_extractor
 
+)
+
+from .core import (
+    metadata_extractor
 )
 
 __version__ = "0.1.0"

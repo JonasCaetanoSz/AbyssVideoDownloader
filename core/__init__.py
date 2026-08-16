@@ -1,2 +1,3 @@
 from .slug_extractor import slug_extractor
 from .thumbnail_extractor import thumbnail_extractor
+from .metadata_extractor import metadata_extractor
