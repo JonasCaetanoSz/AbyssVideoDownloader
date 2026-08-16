@@ -1,20 +1,24 @@
-from dataclasses import dataclass, field
-
-
-@dataclass
-class MediaConfig:
-    poster: bool = False
-    preview: bool = False
-    is_download: bool = False
+from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
 class EncryptedMedia:
-    title: str = ""
-    has_bandwidth: bool = False
-    is_raw: bool = False
-    slug: str = ""
-    md5_id: int = 0
-    user_id: int = 0
-    media: bytes = field(default_factory=bytes)
-    config: MediaConfig = field(default_factory=MediaConfig)
+
+    @dataclass
+    class Config:
+        poster: bool
+        preview: bool
+        isDownload: bool
+        logo: Optional[dict] = None
+
+
+    title: str
+    hasBandwidth: bool
+    isRaw: bool
+    slug: str
+    md5_id: int
+    user_id: int
+    media: str
+    config: Config
+    danmu: Optional[dict] = None

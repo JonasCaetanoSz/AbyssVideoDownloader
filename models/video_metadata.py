@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -9,6 +10,7 @@ class VideoMetadata:
         poster: bool
         preview: bool
         isDownload: bool
+        logo: Optional[dict] = None
 
 
     title: str
@@ -19,3 +21,4 @@ class VideoMetadata:
     user_id: int
     media: str
     config: Config
+    danmu: Optional[dict] = None

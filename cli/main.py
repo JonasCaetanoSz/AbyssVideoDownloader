@@ -6,6 +6,7 @@ from exceptions import InvalidSlugException
 
 import argparse
 
+import json
 
 def main():
 
@@ -75,6 +76,11 @@ def main():
         help="Video URL"
     )
 
+    metadata.add_argument(
+        "--json",
+        action="store_true",
+        help="Output metadata as JSON object"
+    )
 
     args = parser.parse_args()
 
@@ -119,8 +125,19 @@ def main():
 
         try:
             metadata = metadata_extractor( video_url=args.url)
-            print(metadata)
 
+            if args.json:
+
+                print(
+                    json.dumps(
+                        metadata.__dict__,
+                        indent=2
+                    )
+                )
+
+            else:
+                print(metadata)
+                
         except Exception as e:
             print("error: " + str(e))
 

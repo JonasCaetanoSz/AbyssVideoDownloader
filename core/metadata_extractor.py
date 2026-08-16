@@ -2,14 +2,20 @@ from core import slug_extractor
 
 from exceptions import MetadataNotFoundException
 
-from models import  VideoMetadata
+from models import ( 
+    VideoMetadata,
+    EncryptedMedia
+)
+
 from ultils import UrlValidator
+
+from crypto import Decryptor
 
 
 import requests
 import json
 
-def metadata_extractor(video_url:str) :
+def metadata_extractor(video_url:str) -> VideoMetadata :
 
     UrlValidator.validate(url=video_url)
     slug = slug_extractor(video_url=video_url).value
@@ -28,7 +34,7 @@ def metadata_extractor(video_url:str) :
     if response.status_code != 200:
         raise MetadataNotFoundException()
 
-    encrypted_data_json = json.loads(response.text)
-    
-    return VideoMetadata(**encrypted_data_json)
+    encrypted_data = EncryptedMedia( **json.loads(response.text) )
+    descrypted_data = Decryptor.decrypt_video_data(encrypted_video_data=encrypted_data)
+    return descrypted_data
 

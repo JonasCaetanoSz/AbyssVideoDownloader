@@ -4,9 +4,9 @@ from .crypto import (
 
 from .models import (
     ExpandedKey,
-    EncryptedMedia,
     VideoThumbnails,
-    VideoMetadata
+    VideoMetadata,
+    EncryptedMedia
 )
 from .exceptions import (
     InvalidSlugException,
