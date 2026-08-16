@@ -1,1 +1,2 @@
-from .slug_extractor import SlugExtractor
+from .slug_extractor import slug_extractor
+from .thumbnail_extractor import thumbnail_extractor

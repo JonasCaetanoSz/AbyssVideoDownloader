@@ -1,2 +1,3 @@
+from .thumbnail_not_found_exception import ThumbnailNotFoundException
 from .invalid_slug_exception import InvalidSlugException
 from .invalid_url_exception import InvalidUrlException

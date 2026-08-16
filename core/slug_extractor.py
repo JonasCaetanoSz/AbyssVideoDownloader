@@ -7,7 +7,7 @@ from models import VideoSlug
 
 from urllib.parse import urlparse, parse_qs
 
-def SlugExtractor(video_url: str) -> VideoSlug:
+def slug_extractor(video_url: str) -> VideoSlug:
     try:
         UrlValidator.validate(url=video_url)
     except InvalidUrlException as e :

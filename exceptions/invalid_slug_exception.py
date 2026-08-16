@@ -1,4 +1,4 @@
 class InvalidSlugException(Exception):
 
-    def __init__(self, message="Slug do vídeo inválido"):
+    def __init__(self, message="Invalid video slug"):
         super().__init__(message)
