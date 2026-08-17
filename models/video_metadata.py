@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from typing import Optional
 
 
@@ -22,3 +22,6 @@ class VideoMetadata:
     media: str
     config: Config
     danmu: Optional[dict] = None
+
+    def to_dict(self):
+        return asdict(self)

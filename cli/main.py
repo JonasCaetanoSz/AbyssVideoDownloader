@@ -136,7 +136,7 @@ def main():
                 )
 
             else:
-                print(metadata)
+                print(metadata.to_dict())
                 
         except Exception as e:
             print("error: " + str(e))
