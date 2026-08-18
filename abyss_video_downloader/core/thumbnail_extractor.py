@@ -1,13 +1,13 @@
-from core.slug_extractor import slug_extractor
+from ..core.slug_extractor import slug_extractor
 
-from models import VideoThumbnails
+from ..models import VideoThumbnails
 
-from exceptions import (
+from ..exceptions import (
     ThumbnailNotFoundException,
     InvalidUrlException
 )
 
-from utils import UrlValidator
+from ..utils import UrlValidator
 
 import requests
 

@@ -14,16 +14,11 @@ requires-python = ">=3.10"
 
 
 [project.scripts]
-abyss = "cli.main:main"
+abyss = "abyss_video_downloader.cli.main:main"
 
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = [
-    "cli*",
-    "core*",
-    "models*",
-    "utils*",
-    "exceptions*",
-    "crypto*"
+    "abyss_video_downloader*"
 ]

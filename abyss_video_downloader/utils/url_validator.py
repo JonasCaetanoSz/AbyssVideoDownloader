@@ -1,4 +1,4 @@
-from exceptions import InvalidUrlException
+from ..exceptions import InvalidUrlException
 
 from urllib.parse import urlparse
 

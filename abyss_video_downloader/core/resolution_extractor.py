@@ -1,4 +1,4 @@
-from models import VideoMetadata
+from ..models import VideoMetadata
 
 
 def resolution_extractor(video_metadata: VideoMetadata) -> dict[str, list[str]]:

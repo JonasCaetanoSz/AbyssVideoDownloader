@@ -7,17 +7,17 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
-from exceptions import (
+from ..exceptions import (
     VideoSourceNotFoundException,
     ResolutionNotAvailableException,
     MissingSegmentException
 
 )
-from models import VideoMetadata, Resolution
+from ..models import VideoMetadata, Resolution
 
-from utils import build_base_url
+from ..utils import build_base_url
 
-from crypto import Decryptor
+from ..crypto import Decryptor
 
 
 FRAGMENT_SIZE = 2097152

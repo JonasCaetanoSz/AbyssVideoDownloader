@@ -1,9 +1,9 @@
-from exceptions.invalid_slug_exception import InvalidSlugException
-from exceptions.invalid_url_exception import InvalidUrlException
+from ..exceptions.invalid_slug_exception import InvalidSlugException
+from ..exceptions.invalid_url_exception import InvalidUrlException
 
-from utils import UrlValidator
+from ..utils import UrlValidator
 
-from models import VideoSlug
+from ..models import VideoSlug
 
 from urllib.parse import urlparse, parse_qs
 

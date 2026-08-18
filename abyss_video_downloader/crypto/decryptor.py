@@ -1,6 +1,6 @@
 import json
 
-from models import (
+from ..models import (
     ExpandedKey,
     EncryptedMedia,
     VideoMetadata

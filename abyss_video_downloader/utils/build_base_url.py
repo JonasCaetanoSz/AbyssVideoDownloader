@@ -1,9 +1,9 @@
-from models import (
+from ..models import (
     VideoFormat,
     VideoSource
 )
 
-from exceptions import DomainNotFoundException
+from ..exceptions import DomainNotFoundException
 
 def build_base_url(video_format: VideoFormat, video_source: VideoSource ):
 

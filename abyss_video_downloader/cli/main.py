@@ -1,11 +1,11 @@
-from core import thumbnail_extractor
-from core import slug_extractor
-from core import metadata_extractor
-from core import download_video
-from core import resolution_extractor
+from ..core import thumbnail_extractor
+from ..core import slug_extractor
+from ..core import metadata_extractor
+from ..core import download_video
+from ..core import resolution_extractor
 
-from utils import print_banner
-from models import Resolution
+from ..utils import print_banner
+from ..models import Resolution
 
 import argparse
 import json

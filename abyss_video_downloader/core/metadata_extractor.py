@@ -1,15 +1,15 @@
-from core import slug_extractor
+from ..core import slug_extractor
 
-from exceptions import MetadataNotFoundException
+from ..exceptions import MetadataNotFoundException
 
-from models import ( 
+from ..models import ( 
     VideoMetadata,
     EncryptedMedia
 )
 
-from utils import UrlValidator
+from ..utils import UrlValidator
 
-from crypto import Decryptor
+from ..crypto import Decryptor
 
 
 import requests
