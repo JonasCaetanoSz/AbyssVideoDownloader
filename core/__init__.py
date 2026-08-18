@@ -2,3 +2,4 @@ from .slug_extractor import slug_extractor
 from .thumbnail_extractor import thumbnail_extractor
 from .metadata_extractor import metadata_extractor
 from .download_video import download_video
+from .resolution_extractor import resolution_extractor

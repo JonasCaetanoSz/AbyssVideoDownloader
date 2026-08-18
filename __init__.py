@@ -30,16 +30,12 @@ from .utils import (
 )
 
 from .core import (
-    slug_extractor
+    slug_extractor,
+    thumbnail_extractor,
+    metadata_extractor,
+    resolution_extractor
 
 )
-from .core import (
-    thumbnail_extractor
 
-)
-
-from .core import (
-    metadata_extractor
-)
 
 __version__ = "0.1.0"

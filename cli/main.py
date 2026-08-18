@@ -2,6 +2,7 @@ from core import thumbnail_extractor
 from core import slug_extractor
 from core import metadata_extractor
 from core import download_video
+from core import resolution_extractor
 
 from models import Resolution
 
@@ -83,6 +84,21 @@ def main():
         help="Output metadata as JSON object"
     )
 
+
+    # command: list-resolutions
+
+    resolutions = sub.add_parser(
+        "list-resolutions",
+        aliases=["lr"],
+        help="Lists available video resolutions"
+    )
+
+    resolutions.add_argument(
+        "-u",
+        "--url",
+        required=True,
+        help="Video URL"
+    )
 
     # command: download-video
 
@@ -196,6 +212,7 @@ def main():
     )
 
 
+
     args = parser.parse_args()
 
 
@@ -284,7 +301,32 @@ def main():
                 "error: " + str(e)
             )
 
+    # execute: list-resolutions
 
+    elif args.command in ["list-resolutions", "lr"]:
+        try:
+            metadata = metadata_extractor(
+                video_url=args.url
+            )
+
+            available = resolution_extractor(
+                video_metadata=metadata
+            )
+
+            print("Available resolutions:\n")
+
+            for video_ext, items in available.items():
+
+                print(f"{video_ext}:")
+
+                for resolution in items:
+
+                    print(f"  - {resolution}")
+        except Exception as e:
+                print(
+                    "error: " + str(e)
+                )
+                
     # execute: download-video
 
     elif args.command in ["download-video", "dl"]:
