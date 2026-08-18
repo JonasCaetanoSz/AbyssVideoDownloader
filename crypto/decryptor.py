@@ -7,6 +7,7 @@ from models import (
 )
 
 from Crypto.Cipher import AES
+
 import hashlib
 
 
@@ -58,3 +59,71 @@ class Decryptor:
         decrypted = cipher.decrypt(encrypted)
 
         return decrypted.decode("utf-8")
+
+    @staticmethod
+    def generate_size_key(size: int) -> str:
+        s = str(size)
+
+        data = bytearray()
+
+        for ch in s:
+
+            if ch.isdigit():
+                data.append(int(ch))
+
+            else:
+                data.append(ord(ch))
+
+
+        return hashlib.md5( bytes(data) ).hexdigest()
+
+
+    @staticmethod
+    def encrypt_path(
+        path_str: str,
+        key_hex: str
+    ) -> str:
+
+        import base64
+
+        from Crypto.Cipher import AES
+        from Crypto.Util import Counter
+
+
+        key_bytes = key_hex.encode()
+
+        iv = key_bytes[:16]
+
+
+        counter = Counter.new(
+            128,
+            initial_value=int.from_bytes(
+                iv,
+                "big"
+            )
+        )
+
+
+        cipher = AES.new(
+            key_bytes,
+            AES.MODE_CTR,
+            counter=counter
+        )
+
+
+        encrypted = cipher.encrypt(
+            path_str.encode()
+        )
+
+
+        first = base64.b64encode(
+            encrypted
+        ).decode().rstrip("=")
+
+
+        second = base64.b64encode(
+            first.encode()
+        ).decode().rstrip("=")
+
+
+        return second

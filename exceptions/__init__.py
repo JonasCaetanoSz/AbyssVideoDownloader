@@ -2,3 +2,7 @@ from .thumbnail_not_found_exception import ThumbnailNotFoundException
 from .invalid_slug_exception import InvalidSlugException
 from .invalid_url_exception import InvalidUrlException
 from .metadata_not_found_exception import MetadataNotFoundException
+from .video_source_not_found_exception import VideoSourceNotFoundException
+from .resolution_not_available_exception import ResolutionNotAvailableException
+from .domain_not_found_exception import DomainNotFoundException
+from .missing_segment_exception import MissingSegmentException

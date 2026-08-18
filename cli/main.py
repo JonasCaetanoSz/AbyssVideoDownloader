@@ -1,12 +1,13 @@
-from core.thumbnail_extractor import thumbnail_extractor
-from core.slug_extractor import slug_extractor
-from core.metadata_extractor import metadata_extractor
+from core import thumbnail_extractor
+from core import slug_extractor
+from core import metadata_extractor
+from core import download_video
 
-from exceptions import InvalidSlugException
+from models import Resolution
 
 import argparse
-
 import json
+
 
 def main():
 
@@ -82,35 +83,108 @@ def main():
         help="Output metadata as JSON object"
     )
 
+
+    # command: download-video
+
+    download = sub.add_parser(
+        "download-video",
+        aliases=["dl"],
+        help="Downloads the video"
+    )
+
+    download.add_argument(
+        "-u",
+        "--url",
+        required=True,
+        help="Video URL"
+    )
+
+    download.add_argument(
+        "-o",
+        "--output",
+        required=False,
+        help="Output file name"
+    )
+
+    download.add_argument(
+        "-r",
+        "--resolution",
+        required=False,
+        default="360p",
+        help="Download resolution"
+    )
+
+    download.add_argument(
+        "-mw",
+        "--max-workers",
+        required=False,
+        type=int,
+        default=8,
+        help="Maximum download workers"
+    )
+
+    download.add_argument(
+        "-hp",
+        "--hide-progress",
+        action="store_true",
+        help="Hide download progress"
+    )
+
+    download.add_argument(
+        "-mr",
+        "--max-retries",
+        required=False,
+        type=int,
+        default=3,
+        help="Maximum segment download retries"
+    )
+
     args = parser.parse_args()
 
+
+    # execute: get-video-slug
 
     if args.command in ["get-video-slug", "gs"]:
 
         try:
+
             slug_video = slug_extractor(
                 video_url=args.url
             )
 
             if slug_video:
-                print(slug_video.value)
+                print(
+                    slug_video.value
+                )
 
-        except InvalidSlugException as e:
-            print("error: " + str(e))
+        except Exception as e:
+            print(
+                "error: " + str(e)
+            )
 
+
+    # execute: get-video-thumbnail
 
     elif args.command in ["get-video-thumbnail", "gt"]:
 
         try:
+
             thumbnail = thumbnail_extractor(
                 video_url=args.url,
                 max_sprites=args.max_sprites
             )
 
-            print("thumbnail: " + thumbnail.thumbnail + "\n")
+            print(
+                "thumbnail: " + thumbnail.thumbnail + "\n"
+            )
 
-            for n, sprite_url in enumerate(thumbnail.sprites, start=1):
-                print(f"sprite [{n}]: {sprite_url}\n")
+            for n, sprite_url in enumerate(
+                thumbnail.sprites,
+                start=1
+            ):
+                print(
+                    f"sprite [{n}]: {sprite_url}\n"
+                )
 
             print(
                 "\033[33mwarning: Don't forget to add the request headers "
@@ -118,28 +192,71 @@ def main():
             )
 
         except Exception as e:
-            print("error: " + str(e))
+            print(
+                "error: " + str(e)
+            )
 
+
+    # execute: get-video-metadata
 
     elif args.command in ["get-video-metadata", "gm"]:
 
         try:
-            metadata = metadata_extractor( video_url=args.url)
+
+            metadata = metadata_extractor(
+                video_url=args.url
+            )
 
             if args.json:
 
                 print(
                     json.dumps(
-                        metadata.__dict__,
+                        metadata.to_dict(),
                         indent=2
                     )
                 )
 
             else:
-                print(metadata.to_dict())
-                
+
+                print(
+                    metadata.to_dict()
+                )
+
         except Exception as e:
-            print("error: " + str(e))
+            print(
+                "error: " + str(e)
+            )
+
+
+    # execute: download-video
+
+    elif args.command in ["download-video", "dl"]:
+
+        try:
+
+            metadata = metadata_extractor(
+                video_url=args.url
+            )
+
+            resolution = Resolution(
+                args.resolution
+            )
+
+            result , output_path = download_video(
+                video_metadata=metadata,
+                resolution=resolution,
+                output=args.output,
+                max_workers=args.max_workers,
+                hide_progress=args.hide_progress,
+                max_retries=args.max_retries
+            )
+
+            print(f"Download completed: {output_path}")
+
+        except Exception as e:
+            print(
+                "error: " + str(e)
+            )
 
 
 if __name__ == "__main__":

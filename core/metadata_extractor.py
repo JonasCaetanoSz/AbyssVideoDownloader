@@ -7,7 +7,7 @@ from models import (
     EncryptedMedia
 )
 
-from ultils import UrlValidator
+from utils import UrlValidator
 
 from crypto import Decryptor
 

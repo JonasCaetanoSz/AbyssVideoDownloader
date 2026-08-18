@@ -1,7 +1,7 @@
 from exceptions.invalid_slug_exception import InvalidSlugException
 from exceptions.invalid_url_exception import InvalidUrlException
 
-from ultils import UrlValidator
+from utils import UrlValidator
 
 from models import VideoSlug
 

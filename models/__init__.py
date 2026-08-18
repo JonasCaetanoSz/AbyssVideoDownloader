@@ -3,3 +3,7 @@ from .video_slug import VideoSlug
 from .video_thumbnails import VideoThumbnails
 from .video_metadata import VideoMetadata
 from .encrypted_media import EncryptedMedia
+from .resolution import Resolution
+from .video_source import VideoSource
+from .video_media import VideoMedia
+from .video_format import VideoFormat

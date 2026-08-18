@@ -7,7 +7,7 @@ from exceptions import (
     InvalidUrlException
 )
 
-from ultils import UrlValidator
+from utils import UrlValidator
 
 import requests
 
