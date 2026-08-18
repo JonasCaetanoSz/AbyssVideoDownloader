@@ -44,13 +44,13 @@ pip install -e .
 
 ```bash
 # Extract video slug
-abyss get-video-slug -u "https://example.com/video/xyz"
+abyss get-video-slug -u "https://abysscdn.com/?v=K8R6OOjS7"
 
 # Get video metadata
-abyss get-video-metadata -u "https://example.com/video/xyz"
+abyss get-video-metadata -u "https://abysscdn.com/?v=K8R6OOjS7"
 
 # Download video
-abyss download-video -u "https://example.com/video/xyz" -r 720p -o my_video.mp4
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7" -r 720p -o my_video.mp4
 ```
 
 ### Library Quick Start
@@ -63,7 +63,7 @@ from abyss_video_downloader import (
 )
 
 # Extract metadata
-metadata = metadata_extractor("https://example.com/video/xyz")
+metadata = metadata_extractor("https://abysscdn.com/?v=K8R6OOjS7")
 
 # Download video
 success, output_path = download_video(
@@ -92,8 +92,8 @@ abyss gs -u <VIDEO_URL>
 
 **Example:**
 ```bash
-abyss get-video-slug -u "https://example.com/video/xyz"
-# Output: xyz
+abyss get-video-slug -u "https://abysscdn.com/?v=K8R6OOjS7"
+# Output: K8R6OOjS7
 ```
 
 ---
@@ -114,7 +114,7 @@ abyss gt -u <VIDEO_URL> [-m MAX_SPRITES]
 
 **Example:**
 ```bash
-abyss get-video-thumbnail -u "https://example.com/video/xyz" -m 5
+abyss get-video-thumbnail -u "https://abysscdn.com/?v=K8R6OOjS7" -m 5
 # Output:
 # thumbnail: https://cdn.example.com/thumbnail.jpg
 # sprite [1]: https://cdn.example.com/sprite_1.jpg
@@ -146,17 +146,17 @@ abyss gm -u <VIDEO_URL> [--json]
 **Example:**
 ```bash
 # Standard output
-abyss get-video-metadata -u "https://example.com/video/xyz"
+abyss get-video-metadata -u "https://abysscdn.com/?v=K8R6OOjS7"
 
 # JSON output
-abyss get-video-metadata -u "https://example.com/video/xyz" --json
+abyss get-video-metadata -u "https://abysscdn.com/?v=K8R6OOjS7" --json
 ```
 
 **Output (sample JSON):**
 ```json
 {
   "user_id": 12345,
-  "slug": "xyz",
+  "slug": "K8R6OOjS7",
   "md5_id": "abc123def456",
   "title": "Video Title",
   "duration": 3600,
@@ -198,7 +198,7 @@ abyss lr -u <VIDEO_URL>
 
 **Example:**
 ```bash
-abyss list-resolutions -u "https://example.com/video/xyz"
+abyss list-resolutions -u "https://abysscdn.com/?v=K8R6OOjS7"
 # Output:
 # Available resolutions:
 # 
@@ -231,20 +231,20 @@ abyss dl -u <VIDEO_URL> [OPTIONS]
 **Examples:**
 ```bash
 # Basic download with default resolution (360p)
-abyss download-video -u "https://example.com/video/xyz"
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7"
 
 # Download with specific resolution
-abyss download-video -u "https://example.com/video/xyz" -r 720p
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7" -r 720p
 
 # Download with custom output name
-abyss download-video -u "https://example.com/video/xyz" -o ./videos/my_video.mp4
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7" -o ./videos/my_video.mp4
 
 # Download to directory
-abyss download-video -u "https://example.com/video/xyz" -o ./videos/
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7" -o ./videos/
 
 # Advanced download with custom workers and retries
 abyss download-video \
-  -u "https://example.com/video/xyz" \
+  -u "https://abysscdn.com/?v=K8R6OOjS7" \
   -r 1080p \
   -o my_video.mp4 \
   -mw 16 \
@@ -276,9 +276,9 @@ abyss dlm -f <FILE> [OPTIONS]
 
 Create a file `urls.txt`:
 ```
-https://example.com/video/abc
-https://example.com/video/def
-https://example.com/video/ghi
+https://abysscdn.com/?v=XXXXXX
+https://abysscdn.com/?v=XXXXXX
+https://abysscdn.com/?v=XXXXXX
 ```
 
 Then run:
@@ -296,10 +296,10 @@ This will download all videos to the `./videos/` directory with 720p resolution.
 
 ```bash
 # 1. Check available resolutions
-abyss list-resolutions -u "https://example.com/video/xyz"
+abyss list-resolutions -u "https://abysscdn.com/?v=K8R6OOjS7"
 
 # 2. Download video
-abyss download-video -u "https://example.com/video/xyz" -r 720p -o downloaded_video.mp4
+abyss download-video -u "https://abysscdn.com/?v=K8R6OOjS7" -r 720p -o downloaded_video.mp4
 
 # 3. Verify completion
 ls -lh downloaded_video.mp4
@@ -310,9 +310,9 @@ ls -lh downloaded_video.mp4
 ```bash
 # Create a file with URLs
 cat > videos.txt << EOF
-https://example.com/video/video1
-https://example.com/video/video2
-https://example.com/video/video3
+https://abysscdn.com/?v=XXXXXX
+https://abysscdn.com/?v=XXXXXX
+https://abysscdn.com/?v=XXXXXX
 EOF
 
 # Download all with high retry count
@@ -323,7 +323,7 @@ abyss download-list -f videos.txt -o ./downloads -r 1080p -mw 16 -mr 10
 
 ```bash
 # Save metadata to file
-abyss get-video-metadata -u "https://example.com/video/xyz" --json > metadata.json
+abyss get-video-metadata -u "https://abysscdn.com/?v=K8R6OOjS7" --json > metadata.json
 
 # Use with jq for processing
 cat metadata.json | jq '.title, .duration, .media | keys'
@@ -421,8 +421,8 @@ print(f"Encrypted token: {encrypted_token}")
 from abyss_video_downloader import slug_extractor
 
 # Extract video identifier from URL
-slug = slug_extractor(video_url="https://example.com/video/xyz")
-print(f"Video slug: {slug.value}")  # Output: xyz
+slug = slug_extractor(video_url="https://abysscdn.com/?v=K8R6OOjS7")
+print(f"Video slug: {slug.value}")  # Output: K8R6OOjS7
 ```
 
 #### Extract Video Thumbnail
@@ -432,7 +432,7 @@ from abyss_video_downloader import thumbnail_extractor
 
 # Get thumbnail and sprite URLs
 thumbnails = thumbnail_extractor(
-    video_url="https://example.com/video/xyz",
+    video_url="https://abysscdn.com/?v=K8R6OOjS7",
     max_sprites=5  # Optional: limit number of sprites
 )
 
@@ -456,7 +456,7 @@ response = requests.get(thumbnails.thumbnail, headers=headers)
 from abyss_video_downloader import metadata_extractor
 
 # Get complete video metadata
-metadata = metadata_extractor(video_url="https://example.com/video/xyz")
+metadata = metadata_extractor(video_url="https://abysscdn.com/?v=K8R6OOjS7")
 
 print(f"Title: {metadata.title}")
 print(f"Duration: {metadata.duration} seconds")
@@ -476,7 +476,7 @@ for format_type, media in metadata.media.items():
 from abyss_video_downloader import metadata_extractor, resolution_extractor
 
 # First get metadata
-metadata = metadata_extractor(video_url="https://example.com/video/xyz")
+metadata = metadata_extractor(video_url="https://abysscdn.com/?v=K8R6OOjS7")
 
 # Then extract available resolutions
 resolutions = resolution_extractor(video_metadata=metadata)
@@ -498,7 +498,7 @@ from abyss_video_downloader import (
 )
 
 # Get video metadata
-metadata = metadata_extractor(video_url="https://example.com/video/xyz")
+metadata = metadata_extractor(video_url="https://abysscdn.com/?v=K8R6OOjS7")
 
 # Download video
 success, output_path = download_video(
@@ -522,7 +522,7 @@ from abyss_video_downloader import (
     Resolution
 )
 
-metadata = metadata_extractor(video_url="https://example.com/video/xyz")
+metadata = metadata_extractor(video_url="https://abysscdn.com/?v=K8R6OOjS7")
 
 success, output_path = download_video(
     video_metadata=metadata,
@@ -547,7 +547,7 @@ from abyss_video_downloader import (
     VideoSourceNotFoundException
 )
 
-url = "https://example.com/video/xyz"
+url = "https://abysscdn.com/?v=K8R6OOjS7"
 
 try:
     metadata = metadata_extractor(video_url=url)
@@ -589,9 +589,9 @@ from abyss_video_downloader import (
 import os
 
 video_urls = [
-    "https://example.com/video/video1",
-    "https://example.com/video/video2",
-    "https://example.com/video/video3",
+    "https://abysscdn.com/?v=XXXXXX",
+    "https://abysscdn.com/?v=XXXXXX",
+    "https://abysscdn.com/?v=XXXXXX",
 ]
 
 output_dir = "./downloads"
@@ -840,7 +840,7 @@ def download_with_custom_tracking(url, resolution, output=None):
 
 # Usage
 download_with_custom_tracking(
-    "https://example.com/video/xyz",
+    "https://abysscdn.com/?v=K8R6OOjS7",
     Resolution("1080p"),
     "./videos/my_video.mp4"
 )
