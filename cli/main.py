@@ -139,6 +139,63 @@ def main():
         help="Maximum segment download retries"
     )
 
+
+    # command: download-list
+
+    download_list = sub.add_parser(
+        "download-list",
+        aliases=["dlm"],
+        help="Downloads multiple videos"
+    )
+
+    download_list.add_argument(
+        "-f",
+        "--file",
+        required=True,
+        help="File containing video URLs"
+    )
+
+    download_list.add_argument(
+        "-o",
+        "--output",
+        required=False,
+        help="Output directory"
+    )
+
+    download_list.add_argument(
+        "-r",
+        "--resolution",
+        required=False,
+        default="360p",
+        help="Download resolution"
+    )
+
+    download_list.add_argument(
+        "-mw",
+        "--max-workers",
+        required=False,
+        type=int,
+        default=8,
+        help="Maximum download workers"
+    )
+
+    download_list.add_argument(
+        "-hp",
+        "--hide-progress",
+        action="store_true",
+        help="Hide download progress"
+    )
+
+    download_list.add_argument(
+        "-mr",
+        "--max-retries",
+        required=False,
+        type=int,
+        default=3,
+        help="Maximum segment download retries"
+    )
+
+
     args = parser.parse_args()
 
 
@@ -242,7 +299,7 @@ def main():
                 args.resolution
             )
 
-            result , output_path = download_video(
+            result, output_path = download_video(
                 video_metadata=metadata,
                 resolution=resolution,
                 output=args.output,
@@ -251,9 +308,81 @@ def main():
                 max_retries=args.max_retries
             )
 
-            print(f"Download completed: {output_path}")
+            print(
+                f"Download completed: {output_path}"
+            )
 
         except Exception as e:
+            print(
+                "error: " + str(e)
+            )
+
+
+    # execute: download-list
+
+    elif args.command in ["download-list", "dlm"]:
+
+        try:
+
+            resolution = Resolution(
+                args.resolution
+            )
+
+            with open(
+                args.file,
+                "r",
+                encoding="utf-8"
+            ) as file:
+
+                urls = [
+                    line.strip()
+                    for line in file
+                    if line.strip()
+                ]
+
+
+            for index, url in enumerate(
+                urls,
+                start=1
+            ):
+
+                try:
+
+                    print(
+                        f"\n[{index}/{len(urls)}] Processing: {url}"
+                    )
+
+                    metadata = metadata_extractor(
+                        video_url=url
+                    )
+
+                    result, output_path = download_video(
+                        video_metadata=metadata,
+                        resolution=resolution,
+                        output=args.output,
+                        max_workers=args.max_workers,
+                        hide_progress=args.hide_progress,
+                        max_retries=args.max_retries
+                    )
+
+                    print(
+                        f"Download completed: {output_path}"
+                    )
+
+
+                except Exception as e:
+
+                    print(
+                        f"Failed: {url}"
+                    )
+
+                    print(
+                        "error: " + str(e)
+                    )
+
+
+        except Exception as e:
+
             print(
                 "error: " + str(e)
             )
