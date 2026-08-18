@@ -27,6 +27,12 @@ cd AbyssVideoDownloader
 pip install -e .
 ```
 
+### From pip
+
+```bash
+ pip install git+https://github.com/JonasCaetanoSz/AbyssVideoDownloader.git
+```
+
 ### Requirements
 
 - Python 3.10+
