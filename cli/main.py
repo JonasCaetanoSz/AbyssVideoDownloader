@@ -4,10 +4,12 @@ from core import metadata_extractor
 from core import download_video
 from core import resolution_extractor
 
+from utils import print_banner
 from models import Resolution
 
 import argparse
 import json
+
 
 
 def main():
@@ -212,9 +214,8 @@ def main():
     )
 
 
-
     args = parser.parse_args()
-
+    print_banner()
 
     # execute: get-video-slug
 

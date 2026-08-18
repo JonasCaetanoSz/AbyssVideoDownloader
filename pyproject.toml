@@ -1,0 +1,29 @@
+[build-system]
+requires = [
+    "setuptools>=61"
+]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "abyss-video-downloader"
+version = "1.0.0"
+description = "Python library and CLI for downloading, extracting video data, and decrypting Abyss CDN media keys"
+readme = "README.md"
+requires-python = ">=3.10"
+
+
+[project.scripts]
+abyss = "cli.main:main"
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "cli*",
+    "core*",
+    "models*",
+    "utils*",
+    "exceptions*",
+    "crypto*"
+]
