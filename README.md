@@ -1,6 +1,6 @@
 # Abyss Video Downloader
 
-Python library and CLI for downloading, extracting video data, and decrypting Abyss CDN media keys.
+AbyssVideoDownloader is a Python library and command-line interface (CLI) that allows users to download Abyss.to videos, extract video metadata and thumbnails, and decrypt protected media data.
 
 ## 📋 Table of Contents
 
